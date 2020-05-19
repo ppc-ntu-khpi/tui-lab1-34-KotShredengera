@@ -87,23 +87,26 @@ public class TUIdemo extends TApplication {
                     int custNum = Integer.parseInt(custNo.getText());
                     Customer customer = Bank.getCustomer(custNum);
 
-                    String sb = "";
-                    sb = "Owner Name: " +customer.getFirstName()+" "+customer.getLastName()+ " (id="+custNum+ ")\n";
+                    StringBuilder sb =new StringBuilder();
+                    sb.append("Owner Name: ")
+                            .append(customer.getFirstName())
+                            .append(" ")
+                            .append(customer.getLastName())
+                            .append(" (id=")
+                            .append(custNum).append(")\n");
                    
                     for (int i = 0; i < customer.getNumberOfAccounts(); i++) {
-                        sb = sb + "Account Type: ";
+                        sb.append("Account Type: ");
                         Account account = customer.getAccount(i);
                         
                         if (account instanceof SavingsAccount){ 
-                            sb = sb +"'Savings'\n";
+                            sb.append("'Savings'\n");
                         }
                         else if (account instanceof CheckingAccount){
-                            sb = sb + "'Checking'\n";
+                            sb.append("'Checking'\n");
                         }
-                        
-                        sb = sb + "Account Balance: $" + account.getBalance() +"\n";
+                        sb.append("Account Balance: $").append(account.getBalance()).append("\n");
                     }
-
                     details.setText(sb.toString());
                 } catch (Exception e) {
                     messageBox("Error","Input valid customer id").show();
@@ -111,6 +114,4 @@ public class TUIdemo extends TApplication {
             }
         });    
     }
-    
-
 }
